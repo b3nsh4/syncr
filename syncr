@@ -1,0 +1,11 @@
+#!/data/data/com.termux/files/usr/bin/bash
+user=ben
+current_ip=$(ip neighbo | sed '1!d' | cut -d' ' -f1)
+src_dir=$1
+dest_dir=$2
+prepend_dir=/home/${user}/${dest_dir}
+if [ -z $1 ]; then
+echo Usage[*] From-Dir To-Dir
+exit 1
+fi
+rsync -vrP --ignore-existing ${src_dir} ${user}@${current_ip}:${prepend_dir}
